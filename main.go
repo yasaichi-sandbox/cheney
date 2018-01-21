@@ -10,7 +10,7 @@ import (
 const cursor = "cheney> "
 
 func main() {
-	context := []string{}
+	context := NewContext()
 	scanner := bufio.NewScanner(os.Stdin)
 
 	fmt.Print(cursor)
@@ -19,7 +19,7 @@ func main() {
 
 		out, err := eval(code, context)
 		if err == nil {
-			context = append(context, "use("+code+")")
+			context.Add(code)
 		}
 
 		fmt.Println(strings.TrimRight(string(out), "\r\n"))
